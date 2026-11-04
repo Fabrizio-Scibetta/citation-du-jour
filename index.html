@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Citation du jour</title>
+<meta name="theme-color" content="#F7F4EC">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="mark">«</span>
+    <span class="brand-name">Citation du jour</span>
+  </div>
+  <div class="tools">
+    <button id="favBtn" class="icon-btn" title="Mes favoris" aria-label="Ouvrir les favoris">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span id="favCount" class="badge" hidden>0</span>
+    </button>
+    <button id="bellBtn" class="icon-btn" title="Notifications" aria-label="Réglages de notification">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M18 15.5V11a6 6 0 10-12 0v4.5L4.5 18h15L18 15.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M10 20.5a2 2 0 004 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <span id="bellDot" class="dot" hidden></span>
+    </button>
+    <button id="themeBtn" class="icon-btn" title="Thème clair / sombre" aria-label="Changer de thème">◐</button>
+  </div>
+</header>
+
+<main>
+  <section class="card" id="card" aria-live="polite">
+    <button id="starBtn" class="star" aria-pressed="false" aria-label="Ajouter aux favoris" title="Ajouter aux favoris">☆</button>
+    <p class="eyebrow" id="eyebrow">Citation du jour</p>
+    <blockquote id="quote">Chargement…</blockquote>
+    <p class="author" id="author"></p>
+    <p class="source" id="source"></p>
+  </section>
+
+  <div class="daynav">
+    <button id="prevBtn" class="ghost" aria-label="Jour précédent">←</button>
+    <span id="dayLabel" class="daylabel"></span>
+    <button id="nextBtn" class="ghost" aria-label="Jour suivant">→</button>
+  </div>
+
+  <div class="actions">
+    <button id="shareBtn" class="primary">Partager la fiche</button>
+    <select id="format" aria-label="Format de l'image">
+      <option value="story">Format story 1080 × 1350</option>
+      <option value="square">Format carré 1080 × 1080</option>
+      <option value="wide">Format large 1200 × 630</option>
+    </select>
+  </div>
+
+  <p class="hint" id="hint">L'image est générée localement : aucune donnée ne quitte votre appareil.</p>
+
+  <details class="about">
+    <summary>À propos &amp; sources</summary>
+    <p id="aboutText">Calendrier philosophique 2026-2027 — 426 citations.</p>
+    <p><a href="confidentialite.html" target="_blank" rel="noopener">Politique de confidentialité</a> — aucune donnée collectée, tout reste sur votre appareil.</p>
+  </details>
+</main>
+
+<footer class="foot">
+  <span id="status"></span>
+</footer>
+
+<aside class="drawer" id="favDrawer" aria-hidden="true" aria-label="Mes favoris">
+  <div class="drawer-head">
+    <h2>Mes favoris</h2>
+    <button class="icon-btn close" data-close="favDrawer" aria-label="Fermer">✕</button>
+  </div>
+  <p class="drawer-sub" id="favSub">Vos citations gardées, dans l'ordre du calendrier.</p>
+  <p class="empty" id="favEmpty">Aucun favori pour l'instant. Touchez l'étoile d'une citation pour la garder.</p>
+  <ul class="fav-list" id="favList"></ul>
+</aside>
+
+<aside class="drawer" id="setDrawer" aria-hidden="true" aria-label="Réglages de notification">
+  <div class="drawer-head">
+    <h2>Rappel quotidien</h2>
+    <button class="icon-btn close" data-close="setDrawer" aria-label="Fermer">✕</button>
+  </div>
+  <p class="drawer-sub">Recevez la citation du jour à l'heure de votre choix, et désactivez le rappel quand vous voulez.</p>
+
+  <label class="switch">
+    <input type="checkbox" id="notifToggle">
+    <span class="track"><span class="thumb"></span></span>
+    <span class="switch-label">Notification quotidienne</span>
+  </label>
+
+  <label class="field">
+    <span>Heure d'envoi</span>
+    <input type="time" id="notifTime" value="08:00">
+  </label>
+
+  <div class="notif-actions">
+    <button id="testBtn" class="ghost">Tester maintenant</button>
+    <span id="notifState" class="state">—</span>
+  </div>
+
+  <p class="drawer-note">Le rappel est programmé sur votre appareil. Sous Windows, la notification s'affiche si l'application est installée ; si elle est fermée, la remise dépend des autorisations du système.</p>
+
+  <details class="about">
+    <summary>Pourquoi une permission ?</summary>
+    <p>Le navigateur demande l'autorisation d'afficher des notifications. Refuser ne casse rien : les citations restent accessibles normalement.</p>
+  </details>
+</aside>
+
+<div class="scrim" id="scrim" hidden></div>
+<canvas id="canvas" width="1080" height="1350" hidden></canvas>
+<script src="data/calendrier.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

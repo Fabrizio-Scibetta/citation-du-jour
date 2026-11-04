@@ -1,0 +1,57 @@
+{
+  "type": "AdaptiveCard",
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "version": "1.6",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "CITATION DU JOUR",
+      "size": "Small",
+      "weight": "Bolder",
+      "color": "Accent",
+      "spacing": "None",
+      "$when": "${$host.widgetSize} != 'small'"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${dateLabel}",
+      "size": "Small",
+      "isSubtle": true,
+      "spacing": "None",
+      "$when": "${$host.widgetSize} != 'small'"
+    },
+    {
+      "type": "TextBlock",
+      "text": "« ${citation} »",
+      "wrap": true,
+      "size": "${$host.widgetSize == 'large' ? 'Large' : 'Medium'}",
+      "weight": "Default",
+      "spacing": "Medium",
+      "fontType": "Default"
+    },
+    {
+      "type": "TextBlock",
+      "text": "— ${auteur}",
+      "wrap": true,
+      "size": "Small",
+      "weight": "Bolder",
+      "spacing": "Medium"
+    },
+    {
+      "type": "TextBlock",
+      "text": "${source}",
+      "wrap": true,
+      "size": "Small",
+      "isSubtle": true,
+      "spacing": "None",
+      "$when": "${$host.widgetSize} != 'small'"
+    }
+  ],
+  "actions": [
+    {
+      "type": "Action.OpenUrl",
+      "title": "Partager la fiche",
+      "url": "${shareUrl}"
+    }
+  ]
+}
